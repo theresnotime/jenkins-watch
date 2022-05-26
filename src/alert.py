@@ -21,7 +21,7 @@ class Alert:
                 "user": self.config.get("alerts")["pushover"]["user"],
                 "message": f"{job} is overdue",
                 "url": self.config.get_job(job)["url"],
-                "device": "PC",
+                "device": self.config.get("alerts")["pushover"]["device"],
             }
             requests.post(url, data=params)
 
