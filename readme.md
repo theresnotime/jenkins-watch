@@ -46,3 +46,15 @@ The configuration is done in the `config.json` file.
     }
 }
 ```
+
+## Debug output
+Enabled by setting `debug` to `true` in the configuration.
+
+```
+Jenkins watch 1.1.0 started
+Debugging..
+Job "beta-scap-sync-world" lastSuccessfulBuild = 2022-05-26 22:25:00.116000. (408s ago) - will alert if > 1500s and 0 >= 2
+Job "beta-code-update-eqiad" lastSuccessfulBuild = 2022-05-26 22:23:00.341000. (528s ago) - will alert if > 1500s and 0 >= 2
+Job "beta-update-databases-eqiad" lastSuccessfulBuild = 2022-05-26 22:20:00.342000. (709s ago) - will alert if > 5400s and 0 >= 2
+Sleeping for 60s
+```
