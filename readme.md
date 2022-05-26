@@ -18,8 +18,7 @@ The configuration is done in the `config.json` file.
             "enabled": true,
             "url": "https://api.pushover.net/1/messages.json",
             "token": "application_token", // Pushover application token
-            "user": "user_token", // Pushover user token
-            "device": "device_name" // Pushover device name
+            "user": "user_token" // Pushover user token
         }
     },
     "jobs": {
@@ -29,9 +28,12 @@ The configuration is done in the `config.json` file.
             "view": "jenkins-view", // The "view" the job is in
             "overdue": 1500, // After how many seconds the job is considered overdue
             "confirms": 2, // How many times the job has to be reported overdue before sending a notification
-            "alerts": [
-                "pushover" // Where to send the notification
-            ]
+            "alerts": {
+                "pushover": {
+                    "device": "device_name", // Pushover device name
+                    "priority": 0 // Default priority
+                }
+            }
         },
         "job-with-no-alert": {
             "name": "job-with-no-alert",

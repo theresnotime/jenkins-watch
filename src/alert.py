@@ -21,13 +21,14 @@ class Alert:
                 "user": self.config.get("alerts")["pushover"]["user"],
                 "message": f"{job} is overdue",
                 "url": self.config.get_job(job)["url"],
-                "device": self.config.get("alerts")["pushover"]["device"],
+                "device": self.config.get_job(job)["alerts"]["pushover"]["device"],
+                "priority": self.config.get_job(job)["alerts"]["pushover"]["priority"],
             }
             requests.post(url, data=params)
 
     def do_alert(self, job):
         job_alerts = self.config.get_job(job)["alerts"]
         if job_alerts:
-            for alert in job_alerts:
+            for alert in job_alerts.keys():
                 self.send_alert(alert, job)
         return

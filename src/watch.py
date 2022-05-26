@@ -45,7 +45,6 @@ if __name__ == "__main__":
     alert = Alert()
 
     print(f"Jenkins watch {constants.JWVER} started")
-    alert.do_alert("beta-update-databases-eqiad")
     if config.get("debug"):
         print("Debugging..")
     main()
