@@ -1,6 +1,7 @@
 import time
 from datetime import datetime
 
+import constants
 from alert import Alert
 from config import Config
 from jenkins import Jenkins
@@ -43,7 +44,8 @@ if __name__ == "__main__":
     jenkins = Jenkins()
     alert = Alert()
 
-    print(f"Jenkins watch {config.get('version')} started")
+    print(f"Jenkins watch {constants.JWVER} started")
+    alert.do_alert("beta-update-databases-eqiad")
     if config.get("debug"):
         print("Debugging..")
     main()

@@ -1,10 +1,12 @@
 import requests
 
+import constants
 from config import Config
 
 
 class Alert:
     def __init__(self):
+        self.constants = constants
         self.config = Config()
 
     def send_alert(self, alert, job):
@@ -25,6 +27,7 @@ class Alert:
 
     def do_alert(self, job):
         job_alerts = self.config.get_job(job)["alerts"]
-        for alert in job_alerts:
-            self.send_alert(alert, job)
+        if job_alerts:
+            for alert in job_alerts:
+                self.send_alert(alert, job)
         return

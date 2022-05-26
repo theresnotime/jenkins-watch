@@ -1,9 +1,12 @@
 import json
 import os
 
+import constants
+
 
 class Config:
     def __init__(self):
+        self.constants = constants
         with open(
             os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.json"),
             "rb",

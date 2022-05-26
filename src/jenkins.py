@@ -1,10 +1,12 @@
 import requests
 
+import constants
 from config import Config
 
 
 class Jenkins:
     def __init__(self):
+        self.constants = constants
         self.config = Config()
 
     def build_url(self, job):

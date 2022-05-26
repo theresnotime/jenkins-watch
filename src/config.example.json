@@ -1,9 +1,8 @@
 {
-    "version": "1.0.0",
-    "debug": true,
-    "interval": 30,
+    "debug": false,
+    "interval": 60,
     "api": {
-        "url": "https://integration.wikimedia.org/ci/view"
+        "url": "https://jenkins.api.url"
     },
     "alerts":{
         "pushover": {
@@ -16,13 +15,21 @@
     "jobs": {
         "job-name": {
             "name": "job-name",
-            "url": "https://link.to.job/",
+            "url": "https://link.to.jenkins.job/",
             "view": "jenkins-view",
-            "overdue": 1200,
+            "overdue": 1500,
             "confirms": 2,
             "alerts": [
                 "pushover"
             ]
+        },
+        "job-with-no-alert": {
+            "name": "job-with-no-alert",
+            "url": "https://link.to.jenkins.job/",
+            "view": "jenkins-view",
+            "overdue": 1500,
+            "confirms": 2,
+            "alerts": []
         }
     }
 }
