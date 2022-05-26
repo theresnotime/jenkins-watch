@@ -1,0 +1,28 @@
+{
+    "version": "1.0.0",
+    "debug": true,
+    "interval": 30,
+    "api": {
+        "url": "https://integration.wikimedia.org/ci/view"
+    },
+    "alerts":{
+        "pushover": {
+            "enabled": true,
+            "url": "https://api.pushover.net/1/messages.json",
+            "token": "application_token",
+            "user": "user_token"
+        }
+    },
+    "jobs": {
+        "job-name": {
+            "name": "job-name",
+            "url": "https://link.to.job/",
+            "view": "jenkins-view",
+            "overdue": 1200,
+            "confirms": 2,
+            "alerts": [
+                "pushover"
+            ]
+        }
+    }
+}
