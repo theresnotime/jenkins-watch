@@ -14,7 +14,8 @@ def do_sleep():
 
 
 def main():
-    confirm_count = config.setup_vars()
+    confirm_count = config.setup_confirms()
+    alert_count = config.setup_alerted()
     run_check = True
 
     while run_check:
@@ -27,9 +28,14 @@ def main():
                 confirm_count[job["name"]] += 1
                 if confirm_count[job["name"]] >= job["confirms"]:
                     print(f"{job['name']} is overdue")
-                    alert.do_alert(job["name"])
+                    if alert_count[job["name"]] is False:
+                        print(f"{job['name']} has not alerted yet - alerting now")
+                        alert_count[job["name"]] = True
+                        alert.do_alert(job["name"])
             else:
+                print(f"Resetting {job['name']} confirm/alert count")
                 confirm_count[job["name"]] = 0
+                alert_count[job["name"]] = False
 
             if config.get("debug"):
                 print(
