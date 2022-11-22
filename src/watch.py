@@ -1,3 +1,4 @@
+import os
 import time
 from datetime import datetime
 
@@ -7,13 +8,22 @@ from config import Config
 from jenkins import Jenkins
 
 
-def do_sleep():
+def writeFile(job: str, state: str) -> None:
+    if config.get("writeFile"):
+        if not os.path.exists("out"):
+            os.makedirs("out")
+        writeFile = open(f"out/{job}.txt", "w")
+        writeFile.write(state)
+        writeFile.close()
+
+
+def do_sleep() -> None:
     if config.get("debug"):
         print(f"Sleeping for {config.get('interval')}s")
     time.sleep(config.get("interval"))
 
 
-def main():
+def main() -> None:
     confirm_count = config.setup_confirms()
     alert_count = config.setup_alerted()
     run_check = True
@@ -32,10 +42,13 @@ def main():
                         print(f"{job['name']} has not alerted yet - alerting now")
                         alert_count[job["name"]] = True
                         alert.do_alert(job["name"])
+                        writeFile(job["name"], "unhealthy")
+
             else:
                 print(f"Resetting {job['name']} confirm/alert count")
                 confirm_count[job["name"]] = 0
                 alert_count[job["name"]] = False
+                writeFile(job["name"], "healthy")
 
             if config.get("debug"):
                 print(

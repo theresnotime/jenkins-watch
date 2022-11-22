@@ -13,22 +13,22 @@ class Config:
         ) as read_file:
             self.config = json.load(read_file)
 
-    def get(self, key):
+    def get(self, key: str) -> str:
         return self.config[key]
 
-    def get_job(self, job):
+    def get_job(self, job: str) -> str:
         return self.get("jobs")[job]
 
-    def get_api_url(self):
+    def get_api_url(self) -> str:
         return self.config["api"]["url"]
 
-    def setup_confirms(self):
+    def setup_confirms(self) -> dict:
         confirms = {}
         for job in self.get("jobs").values():
             confirms[job["name"]] = 0
         return confirms
 
-    def setup_alerted(self):
+    def setup_alerted(self) -> dict:
         alerted = {}
         for job in self.get("jobs").values():
             alerted[job["name"]] = False

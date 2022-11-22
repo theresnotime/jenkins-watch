@@ -9,7 +9,7 @@ class Alert:
         self.constants = constants
         self.config = Config()
 
-    def send_alert(self, alert, job):
+    def send_alert(self, alert: str, job: str) -> None:
         if self.config.get("debug"):
             print(f"Sending {alert} alert for {job}")
 
@@ -26,7 +26,7 @@ class Alert:
             }
             requests.post(url, data=params)
 
-    def do_alert(self, job):
+    def do_alert(self, job: str) -> None:
         job_alerts = self.config.get_job(job)["alerts"]
         if job_alerts:
             for alert in job_alerts.keys():
